@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
 
@@ -79,6 +80,7 @@ const Nav = () => {
           <div className="flex items-center gap-4">
             
             <div className="flex items-center gap-x-1">
+              <Link to={"/login"}>
               <Button
                 variant="text"
                 size="sm"
@@ -86,13 +88,16 @@ const Nav = () => {
               >
                 <span>Log In</span>
               </Button>
+              </Link>
+              <Link to={"/register"}>
               <Button
                 variant="gradient"
                 size="sm"
                 className="hidden lg:inline-block"
               >
-                <span>Sign in</span>
+                <span>Sign Up</span>
               </Button>
+              </Link>
             </div>
             <IconButton
               variant="text"
