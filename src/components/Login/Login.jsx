@@ -5,9 +5,25 @@ import {
     Button,
     Typography,
   } from "@material-tailwind/react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
+
+    const {loggedInUser} = useContext(AuthContext)
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault()
+
+        const email = e.target.email.value
+        const password = e.target.password.value
+
+        loggedInUser(email, password)
+        .then( result => console.log(result.user))
+        .catch( error => console.log(error.message))
+    }
     return (
         <div className=" flex justify-center items-center my-6">
             <>
@@ -18,7 +34,7 @@ const Login = () => {
       <Typography color="gray" className="mt-1 font-normal">
         Nice to meet you! Enter your details to Sign in.
       </Typography>
-      <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Your Email
@@ -27,6 +43,7 @@ const Login = () => {
             size="lg"
             required
             type="email"
+            name="email"
             placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
@@ -38,6 +55,7 @@ const Login = () => {
           </Typography>
           <Input
             type="password"
+            name="password"
             required
             size="lg"
             placeholder="********"
